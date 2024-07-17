@@ -1,5 +1,5 @@
 app_name = "navari_frappehr_biostar"
-app_title = "Frappe Biostar Biometric"
+app_title = "Biostar Biometric Integration"
 app_publisher = "Navari Limited"
 app_description = "Suprema Biostar Biometric Integration with FrappeHR"
 app_email = "mwendwa@navari.co.ke"
