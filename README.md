@@ -1,4 +1,4 @@
-## FrappeHR to Suprema Biostar Biometric Integration
+## Suprema Biostar Biometric Integration
 
 ### Introduction
 **Suprema Biostar** is a leading provider of biometric solutions specializing in advanced technologies for time and attendance management, access control, and workforce management.
