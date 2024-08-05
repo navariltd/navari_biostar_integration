@@ -38,6 +38,7 @@ This doctype is used to store the following configuration details:
 3. **TA URL**: The time and attendance URL
 6. **Start Date**: The start date for fetching attendance records
 7. **End Date**: The end date for fetching attendance records
+![Image11](https://github.com/user-attachments/assets/8e449fce-0a6a-4446-afd6-32fe65e0e3fe)
 
 #### Usage
 This application provides both scheduled tasks and manual functions to fetch and synchronize check in data from Biostar Biometrics API based on the configurations set in the "Biometric Settings" doctype.
@@ -63,7 +64,7 @@ This application provides both scheduled tasks and manual functions to fetch and
 2.  **Choose the respective employee whose attendance you want to fetch.**
 3.  **Click on the "Fetch Attendance" button.** In the dialog, enter the dates for which you want to fetch the attendance. By default, the start date will be the last sync date (you can change this if needed).
 4.  **Check the "Employee Checkins" for the retrieved data.**
-![image (2)](https://github.com/navariltd/navari-frappehr-biostar/assets/60258622/df3caae8-d1d3-4231-9c47-2a7721a1a19a)
+![image 12](https://github.com/user-attachments/assets/4ce44814-b894-4788-8cbe-5809e6875e0b)
 
 ### Fetching Attendance for Multiple Employees
 
@@ -72,7 +73,7 @@ If you want to fetch attendance for employees who belong to the same department 
 1.  **Navigate to the "Employee" doctype.**
 2.  **Use filters to get the respective employees you want to fetch.**
 3.  **Click on the "Action" button and choose "Fetch Attendance".** This will queue the job in the background and trigger the function to fetch the attendance.
-   ![image](https://github.com/navariltd/navari-frappehr-biostar/assets/60258622/619bc34c-bf92-4f3a-a4ea-c4e9cc6590a8)
+![image 13](https://github.com/user-attachments/assets/0581a060-581a-4566-834f-d3353c5ffa40)
 
   
 #### Fetching Attendance Records
