@@ -53,6 +53,7 @@ This application provides both scheduled tasks and manual functions to fetch and
     -   Callback URL
     -   Start Date
     -   End Date
+    -   Active - By default it's 0. So always tick this to activate the Biostar functionalities.
 3.  **Save the settings.**
 4.  **To manually trigger attendance data synchronization:**
     -   Call the `add_checkin_logs_for_current_day()` function to fetch attendance records for the current day.
