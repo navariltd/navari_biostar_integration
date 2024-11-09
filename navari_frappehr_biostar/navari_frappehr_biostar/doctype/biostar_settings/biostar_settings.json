@@ -12,6 +12,7 @@
   "password",
   "column_break_jltg",
   "ta_url",
+  "active",
   "fetch_attendance_logs_section",
   "start_date",
   "column_break_vwvl",
@@ -64,12 +65,18 @@
    "fieldname": "end_date",
    "fieldtype": "Date",
    "label": "End Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Active"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-06-29 11:13:02.126918",
+ "modified": "2024-11-09 10:49:21.677739",
  "modified_by": "Administrator",
  "module": "Navari Frappehr Biostar",
  "name": "Biostar Settings",
