@@ -11,6 +11,7 @@ from datetime import datetime
 SETTINGS_DOCTYPE = "Biostar Settings"
 username = frappe.db.get_single_value(SETTINGS_DOCTYPE, "username")
 password = get_decrypted_password(SETTINGS_DOCTYPE, SETTINGS_DOCTYPE, "password")
+is_active = frappe.db.get_single_value(SETTINGS_DOCTYPE, "active")
 erpnext_instance_url = get_url().__str__()
 ta_base_url = frappe.db.get_single_value(SETTINGS_DOCTYPE, "ta_url").__str__()
 
@@ -31,7 +32,8 @@ class BiostarConnect:
 			"user_id": self.username,
 			"password": self.password,
 		}
-
+		if is_active==0:
+			return
 		try:
 			response = requests.post(login_url, data=request_body, verify=False)
 			if response.status_code == 200:
@@ -53,8 +55,11 @@ class BiostarConnect:
 		offset = 0
 		limit = 200
 
-	  
+		if is_active==0:
+			return 
 		while True:
+			# if is_active==0:
+			# 	break
 			if not self.cookie or is_cookie_expired(self.cookie):
 				self.cookie = self.login()
 			headers["Cookie"] = self.cookie
@@ -194,6 +199,7 @@ def is_cookie_expired(cookie_string):
 
 @frappe.whitelist()
 def add_checkin_logs_for_current_day():
+	
 	enqueue_fetching_logs(today().__str__(), today().__str__())
 	
 def check_relieving_date(employee):
@@ -237,7 +243,9 @@ def add_checkin_logs(start_date=None, end_date=None):
 		update_last_sync_employee_date(employee.name, end_date)
 
 @frappe.whitelist()
-def add_checkin_logs_for_specified_dates(start_date, end_date):   
+def add_checkin_logs_for_specified_dates(start_date, end_date, status=is_active):  
+	if status ==0:
+		return 
 	enqueue_fetching_logs(start_date, end_date)
 		
 #Push the job to the queue, background job
@@ -254,7 +262,9 @@ def enqueue_fetching_logs(start_date, end_date):
 	return job_id
 
 @frappe.whitelist()
-def add_checkin_logs_for_specified_date(start_date, end_date):
+def add_checkin_logs_for_specified_date(start_date, end_date, status=is_active):
+	if status ==0:
+		return
 	add_checkin_logs(start_date=start_date, end_date=end_date)
    
 
@@ -275,6 +285,9 @@ def set_last_sync_of_checkin_as_now():
 
 @frappe.whitelist()
 def fetch_single_employee_attendance(start_date, end_date, employee):
+	if is_active==0:
+		frappe.throw("Biostar is not active")
+		return
 	employee_doc = frappe.get_doc('Employee', employee)
 	if not employee_doc.attendance_device_id:
 		frappe.throw(f'Employee {employee_doc.name} does not have an attendance device ID.')
@@ -328,7 +341,7 @@ def fetch_attendance_list(start_date, end_date, employees):
   
 @frappe.whitelist()
 def fetch_attendance_logs_for_list_employees(start_date, end_date, employees):
-	employee_list = ast.literal_eval(employees)#converts the string to a list
+	employee_list = ast.literal_eval(employees)
 	enqueue_fetching_logs_list(start_date, end_date, employee_list)
 
 def enqueue_fetching_logs_list(start_date, end_date, employees):
